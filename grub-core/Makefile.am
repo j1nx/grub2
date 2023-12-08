@@ -457,8 +457,8 @@ CLEANFILES += crypto.lst
 extra_deps.lst:
 	@echo $(EXTRA_DEPS) | sed "s/\s*:\s*/\n/g" > $@
 
-syminfo.lst: gensyminfo.sh kernel_syms.lst extra_deps.lst $(MODULE_FILES)
-	cat kernel_syms.lst extra_deps.lst > $@.new
+syminfo.lst: gensyminfo.sh kernel_syms.lst $(top_srcdir)/grub-core/extra_deps.lst $(MODULE_FILES)
+	cat kernel_syms.lst $(top_srcdir)/grub-core/extra_deps.lst > $@.new
 	for m in $(MODULE_FILES); do \
 	  sh $< $$m >> $@.new || exit 1; \
 	done
